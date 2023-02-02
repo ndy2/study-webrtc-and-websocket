@@ -1,29 +1,24 @@
 package com.ndy.chat.service
 
 import com.ndy.chat.domain.entity.ChatRoom
+import com.ndy.chat.domain.repository.ChatRoomRepository
+import com.ndy.chat.util.notFound
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
-class ChatRoomRoomServiceImpl : ChatRoomService {
+class ChatRoomRoomServiceImpl(
+    val chatRoomRepository: ChatRoomRepository
+) : ChatRoomService {
 
-    private val store = mutableMapOf<String, ChatRoom>()
-
-    override fun createChatRoom(chatRoomName: String): ChatRoom {
-        val chatRoomId = getNewChatRoomId()
-        return ChatRoom(
-            chatRoomId,
-            chatRoomName,
-        ).also { store[chatRoomId] = it }
+    override fun createChatRoom(name: String): ChatRoom {
+        return ChatRoom(name).also { chatRoomRepository.save(it) }
     }
 
     override fun findAllRoom(): List<ChatRoom> {
-        return store.values.toList()
+        return chatRoomRepository.findAll().toList()
     }
 
-    override fun findChatRoomById(chatRoomId: String): ChatRoom {
-        return store[chatRoomId] ?: throw IllegalArgumentException("no such chat room Id $chatRoomId")
+    override fun findChatRoomById(roomId: String): ChatRoom {
+        return chatRoomRepository.findByRoomId(roomId) ?: notFound(ChatRoom::class, roomId)
     }
-
-    private fun getNewChatRoomId() = UUID.randomUUID().toString()
 }

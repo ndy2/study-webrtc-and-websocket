@@ -4,9 +4,9 @@ import com.ndy.chat.domain.entity.ChatRoom
 
 interface ChatRoomService {
 
-    fun createChatRoom(chatRoomName: String): ChatRoom
+    fun createChatRoom(name: String): ChatRoom
 
     fun findAllRoom(): List<ChatRoom>
 
-    fun findChatRoomById(chatRoomId: String): ChatRoom
+    fun findChatRoomById(roomId: String): ChatRoom
 }

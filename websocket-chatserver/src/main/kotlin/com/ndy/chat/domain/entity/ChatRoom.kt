@@ -1,28 +1,13 @@
 package com.ndy.chat.domain.entity
 
-import org.springframework.web.socket.WebSocketSession
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import java.util.*
 
+@Entity
 data class ChatRoom(
-    val chatRoomId: String,
-    val chatRoomName: String,
+    val name: String,
 ) {
-    private val chatRoomSessions = mutableSetOf<WebSocketSession>()
-
-    fun handleChatMessageType(
-        chatRoomSession: WebSocketSession,
-        chatMessage: ChatMessage,
-    ) {
-        if (chatMessage.type == ChatMessageType.ENTER) {
-            chatRoomSessions.add(chatRoomSession)
-            chatMessage.content = "${chatMessage.senderUsername} 님이 입장하셨습니다."
-        }
-    }
-
-    fun sendChatMessagesToAllSessions(
-        chatMessage: ChatMessage,
-        sendChatMessageToSession: (ChatMessage, WebSocketSession) -> Unit,
-    ) {
-        chatRoomSessions.forEach { sendChatMessageToSession(chatMessage, it) }
-    }
-
+    @Id
+    val roomId = UUID.randomUUID().toString()
 }
