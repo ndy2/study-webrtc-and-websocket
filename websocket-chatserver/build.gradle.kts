@@ -37,6 +37,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly ("com.h2database:h2")
 
+    //step3
+    implementation ("org.springframework.kafka:spring-kafka")
+
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
