@@ -18,7 +18,7 @@ class KafkaMessageSubscriber(
 
     private val log = KotlinLogging.logger {}
 
-    @KafkaListener(id = "채팅 메시지 전송 카프카 리스너", topicPattern = "chatRoom\\..*", groupId = "chatRooms")
+    @KafkaListener(id = "kafka-onChatMessage", topicPattern = "chatRoom\\..*", groupId = "chatRooms")
     override fun onMessage(message: Message<ChatMessage>) {
         val chatMessage = message.payload
 

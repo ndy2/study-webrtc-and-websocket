@@ -1,5 +1,6 @@
 package com.ndy.chat.controller
 
+import jakarta.servlet.http.HttpServletRequest
 import mu.KotlinLogging
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -14,8 +15,10 @@ class ChatRoomViewController {
     private val log = KotlinLogging.logger {}
 
     @GetMapping("/room")
-    fun chatRoomsView(model: Model) : String {
-        log.info { "visit chat rooms view" }
+    fun chatRoomsView(
+        req : HttpServletRequest
+    ) : String {
+        log.info { "visit chat rooms view, ${req.requestURI}" }
         return "/chat/room"
     }
 

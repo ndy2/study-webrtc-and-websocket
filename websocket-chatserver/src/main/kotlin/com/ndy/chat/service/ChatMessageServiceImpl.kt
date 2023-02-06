@@ -10,9 +10,9 @@ class ChatMessageServiceImpl(
     private val messagePublisher: MessagePublisher
 ) : ChatMessageService {
 
-    override fun sendChatMessage(chatMessage: ChatMessage) {
+    override fun sendChatMessage(chatMessage: ChatMessage, username: String) {
         if (chatMessage.type == ChatMessageType.ENTER)
-            chatMessage.message = "${chatMessage.sender}님이 입장 하셨습니다."
+            chatMessage.message = "$username 님이 입장 하셨습니다."
 
         messagePublisher.publish("chatRoom.${chatMessage.roomId}", chatMessage)
     }

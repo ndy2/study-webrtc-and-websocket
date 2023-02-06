@@ -4,5 +4,5 @@ import com.ndy.chat.domain.entity.ChatMessage
 
 interface ChatMessageService {
 
-    fun sendChatMessage(chatMessage: ChatMessage)
+    fun sendChatMessage(chatMessage: ChatMessage, username: String)
 }
