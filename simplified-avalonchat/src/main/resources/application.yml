@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:chatapp
+    username: sa
+    password:
+
+  freemarker:
+    cache: false
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .ftl
+
+logging:
+  level:
+    org.springframework.security: DEBUG
